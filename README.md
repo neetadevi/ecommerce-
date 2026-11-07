@@ -1,78 +1,50 @@
-# React + TypeScript + Vite
+# unique_fashion — Luxury Ethnic & Indo-Western Fashion Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Live Website](https://img.shields.io/badge/Live%20Website-unique__fashion-8B1E3F?style=for-the-badge&logo=google-chrome)](https://neetadevi.github.io/ecommerce-/)
+[![Supabase Connected](https://img.shields.io/badge/Supabase-Connected-3ECF8E?style=for-the-badge&logo=supabase)](https://mxhbfezoowjjtjghadgn.supabase.co)
+[![Deployment](https://img.shields.io/badge/GitHub%20Pages-Active-22c55e?style=for-the-badge&logo=github)](https://neetadevi.github.io/ecommerce-/)
 
-Currently, two official plugins are available:
+> **Live Website:** [https://neetadevi.github.io/ecommerce-/](https://neetadevi.github.io/ecommerce-/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🌟 Overview
+**unique_fashion** is a luxury ethnic and contemporary fashion e-commerce storefront inspired by the Broadcast theme of premium Indian fashion brands. Built with high-performance modern web technologies (React 19, TypeScript, Tailwind CSS, Vite) and powered by **Supabase Database & Authentication**.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+---
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+## ✨ Features
 
-## Expanding the ESLint configuration
+- **Luxury Hero Slider:** Left/right carousel controls with auto-sliding campaign banners and high-definition video playback.
+- **4 Curated Categories (28 Products total, 7 per category):**
+  - **Lady Garments:** Velvet Suit Sets, Embroidered Kurtas, Anarkali Sets, Silk Co-ord Sets, etc.
+  - **Shoes & Footwear:** Handcrafted Juttis, Embroidered Mojaris, Block Heels, Kolhapuris.
+  - **T-Shirts:** Luxury Graphic Tees, Oversized Comfort Fits, Minimalist Classic Tees.
+  - **Shirts:** Tailored Linen Shirts, Mandarin Collar Shirts, Premium Textured Cotton.
+- **Responsive Layout:**
+  - **Mobile:** 2-column side-by-side product cards with sticky mobile bottom navigation.
+  - **Desktop:** 4-column luxury showcase with quick hover previews.
+- **Smart Catalog View:** Shows 4 products initially with smooth **See More** / **Show Less** toggles.
+- **Complete Checkout Flow:**
+  - Add to Bag & Instant **Buy Now** buttons.
+  - Slide-over Shopping Bag with free shipping threshold meter and `UNIQUE20` discount coupon.
+  - Full Indian Delivery Address Form (Full Name, 10-Digit Mobile, Pincode, City, State, Address).
+  - Multiple Payment Options (Cash on Delivery, UPI PhonePe/GPay, Credit/Debit Card).
+  - Direct persistence into **Supabase `public.orders`** table.
+- **Live Order Tracking:** Track orders by Order ID with live Supabase query fallback.
+- **WhatsApp Support:** Floating WhatsApp customer support button.
+- **Luxury Footer:** Includes authentic artisan trust badges, easy returns, policy links, and newsletter subscription connected to Supabase.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Frontend:** React 19, TypeScript, Vite, Tailwind CSS
+- **Icons:** Lucide React
+- **Backend & Database:** Supabase (`orders`, `newsletter_subscribers`)
+- **Hosting & CI/CD:** GitHub Actions + GitHub Pages
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
 
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+## 🚀 Live Demo
+Open the live store: **[https://neetadevi.github.io/ecommerce-/](https://neetadevi.github.io/ecommerce-/)**
