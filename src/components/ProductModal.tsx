@@ -9,6 +9,7 @@ interface ProductModalProps {
   isWishlisted: boolean
   onToggleWishlist: (product: Product) => void
   onAddToCart: (product: Product, size: string, quantity: number) => void
+  onBuyNow: (product: Product, size: string, quantity: number) => void
 }
 
 export const ProductModal: React.FC<ProductModalProps> = ({
@@ -16,7 +17,8 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   onClose,
   isWishlisted,
   onToggleWishlist,
-  onAddToCart
+  onAddToCart,
+  onBuyNow
 }) => {
   if (!product) return null
 
@@ -237,10 +239,10 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               <button
                 type="button"
                 onClick={handleAdd}
-                className={`flex-1 py-3 px-6 rounded-md font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md ${
+                className={`flex-1 py-3 px-4 rounded-md font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md ${
                   added
                     ? 'bg-emerald-700 text-white'
-                    : 'bg-neutral-900 hover:bg-amber-800 text-white'
+                    : 'bg-neutral-100 hover:bg-neutral-200 text-neutral-900 border border-neutral-300'
                 }`}
               >
                 {added ? (
@@ -252,6 +254,17 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                     <ShoppingBag size={16} /> Add to Bag
                   </>
                 )}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  onBuyNow(product, selectedSize, quantity)
+                  onClose()
+                }}
+                className="flex-1 py-3 px-4 rounded-md font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-md bg-neutral-900 hover:bg-[#8B1E3F] text-white"
+              >
+                Buy Now
               </button>
 
               <button

@@ -31,24 +31,21 @@ export const Header: React.FC<HeaderProps> = ({
   const [userDropdownOpen, setUserDropdownOpen] = useState(false)
 
   const navLinks = [
-    { label: 'New Launch', value: 'New Launch' },
-    { label: 'Suit Sets', value: 'Suit Sets' },
-    { label: 'Kurta Sets', value: 'Kurta Sets' },
-    { label: 'Co-Ord Sets', value: 'Co-ord Sets' },
-    { label: 'Kurtas & Kurtis', value: 'Kurtas & Kurtis' },
-    { label: 'Velvets', value: 'Velvets' },
-    { label: 'LK Jewels', value: 'Jewellery' },
-    { label: 'Bottomwear', value: 'Bottoms' },
-    { label: 'UPTO 50% OFF', value: 'Sale' }
+    { label: 'All Collection', value: 'All' },
+    { label: 'Lady Garments', value: 'Lady Garments' },
+    { label: 'Shoes', value: 'Shoes' },
+    { label: 'T-Shirts', value: 'T-Shirts' },
+    { label: 'Shirts', value: 'Shirts' },
+    { label: 'Sale (20% OFF)', value: 'Sale' }
   ]
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-xs border-b border-neutral-100 transition-all duration-300">
       {/* Top Announcement Bar */}
-      <div className="bg-[#1C1917] text-amber-200 py-1.5 px-4 text-xs font-medium tracking-widest text-center flex items-center justify-center gap-3 overflow-hidden select-none">
+      <div className="bg-[#1C1917] text-amber-200 py-2 px-4 text-xs font-medium tracking-widest text-center flex items-center justify-center gap-3 overflow-hidden select-none">
         <Sparkles size={13} className="text-amber-400 animate-pulse hidden sm:inline" />
         <span className="uppercase text-[11px] sm:text-xs tracking-wider">
-          WINTER • NAYAM • UPTO 50% OFF • VELVETS • FREE EXPRESS SHIPPING ACROSS INDIA • CODE: <strong className="text-white underline decoration-amber-400 font-bold">UNIQUE20</strong>
+          ✦ FLAT 20% OFF ON ALL ORDERS | USE CODE: <strong className="text-white underline decoration-amber-400 font-bold">UNIQUE20</strong> ✦ FREE EXPRESS DELIVERY ACROSS INDIA ✦
         </span>
         <Sparkles size={13} className="text-amber-400 animate-pulse hidden sm:inline" />
       </div>
@@ -71,7 +68,7 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Desktop Left Nav Links */}
           <nav className="hidden lg:flex items-center space-x-6 text-[13px] font-medium tracking-wider uppercase text-neutral-700">
-            {navLinks.slice(0, 4).map((link) => (
+            {navLinks.slice(0, 3).map((link) => (
               <button
                 key={link.value}
                 type="button"
@@ -184,32 +181,20 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Desktop Secondary Navigation Bar */}
-        <div className="hidden lg:flex items-center justify-center space-x-8 py-2.5 border-t border-neutral-100 text-xs tracking-widest uppercase font-semibold text-neutral-600">
-          {navLinks.slice(4).map((link) => (
+        {/* Desktop Navigation Links */}
+        <div className="hidden lg:flex items-center justify-center space-x-10 py-2.5 border-t border-neutral-100 text-xs tracking-widest uppercase font-semibold text-neutral-600">
+          {navLinks.map((link) => (
             <button
               key={link.value}
               type="button"
               onClick={() => onSelectCategory(link.value)}
               className={`hover:text-amber-800 transition-colors cursor-pointer ${
-                activeCategory === link.value ? 'text-amber-800 underline underline-offset-4 decoration-amber-600' : ''
+                activeCategory === link.value ? 'text-amber-800 font-bold underline underline-offset-8 decoration-2 decoration-amber-700' : ''
               }`}
             >
               {link.label}
             </button>
           ))}
-          <a
-            href="#promise"
-            className="text-amber-900 hover:text-amber-700 transition-colors cursor-pointer font-bold"
-          >
-            Our Promise
-          </a>
-          <a
-            href="#stores"
-            className="hover:text-amber-800 transition-colors cursor-pointer"
-          >
-            Find Stores
-          </a>
         </div>
       </div>
 
@@ -235,8 +220,6 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           <div className="pt-3 border-t border-neutral-100 flex flex-col space-y-2 text-sm text-neutral-600">
-            <a href="#promise" onClick={() => setMobileMenuOpen(false)} className="py-1">The unique_fashion Promise</a>
-            <a href="#stores" onClick={() => setMobileMenuOpen(false)} className="py-1">Stores &amp; Boutiques</a>
             {userEmail ? (
               <button
                 type="button"
@@ -244,7 +227,7 @@ export const Header: React.FC<HeaderProps> = ({
                   onSignOut()
                   setMobileMenuOpen(false)
                 }}
-                className="text-left py-1 text-red-600 font-semibold"
+                className="text-left py-1 text-red-600 font-semibold cursor-pointer"
               >
                 Sign Out ({userEmail})
               </button>
@@ -255,7 +238,7 @@ export const Header: React.FC<HeaderProps> = ({
                   onOpenAuth()
                   setMobileMenuOpen(false)
                 }}
-                className="text-left py-1 text-amber-800 font-bold"
+                className="text-left py-1 text-amber-800 font-bold cursor-pointer"
               >
                 Login / Register
               </button>
@@ -266,4 +249,3 @@ export const Header: React.FC<HeaderProps> = ({
     </header>
   )
 }
-

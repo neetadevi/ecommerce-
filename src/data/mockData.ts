@@ -1,7 +1,7 @@
 export interface Product {
   id: string
   title: string
-  category: 'Suit Sets' | 'Kurta Sets' | 'Co-ord Sets' | 'Kurtas & Kurtis' | 'Dresses' | 'Jewellery'
+  category: 'Lady Garments' | 'Shoes' | 'T-Shirts' | 'Shirts'
   price: number
   originalPrice: number
   discount: number
@@ -20,17 +20,10 @@ export interface Product {
 export interface Category {
   id: string
   name: string
+  categoryKey: 'Lady Garments' | 'Shoes' | 'T-Shirts' | 'Shirts'
   image: string
   itemCount: string
   tagline: string
-}
-
-export interface CelebrityLook {
-  name: string
-  role: string
-  image: string
-  outfitTitle: string
-  price: number
 }
 
 export const HERO_SLIDES = [
@@ -39,121 +32,87 @@ export const HERO_SLIDES = [
     type: 'video',
     videoUrl: 'https://cdn.shopify.com/videos/c/o/v/4c378eceefa844188e8babd74a46f40d.mp4',
     poster: 'https://www.lakshita.com/cdn/shop/files/DESKTOP_ee498332-86ea-425b-b0a7-7908cafc40cf.jpg?v=1793332457&width=1800',
-    subtitle: 'SHAADI SPECIALS • SPRING 2025',
-    title: 'Celebrate Grand Elegance',
-    description: 'Intricately embroidered velvet, pure silk, and chanderi ensembles designed for regal celebrations.',
-    ctaText: 'EXPLORE THE COLLECTION',
-    link: '#collections'
+    subtitle: 'NEW SEASON ARRIVALS 2025',
+    title: 'Modern Style & Traditional Elegance',
+    description: 'Explore our latest collection of premium ethnic garments, trendy footwear, casual shirts, and luxury apparel.',
+    ctaText: 'EXPLORE ALL'
   },
   {
     id: 2,
     type: 'image',
     imageUrl: 'https://www.lakshita.com/cdn/shop/files/DESKTOP_ee498332-86ea-425b-b0a7-7908cafc40cf.jpg?v=1793332457&width=1800',
-    subtitle: 'VELVET EDIT',
-    title: 'Royal Velvet Heirlooms',
-    description: 'Impeccable craftsmanship meets plush heritage velvet for statement festive style.',
-    ctaText: 'SHOP VELVET',
-    link: '#collections'
+    subtitle: 'LADY GARMENTS FESTIVE EDIT',
+    title: 'Handcrafted Ethnic & Velvet Heirlooms',
+    description: 'Impeccable zari threadwork, royal velvets, and flowy chanderi suits designed for celebratory occasions.',
+    ctaText: 'SHOP LADY GARMENTS'
   },
   {
     id: 3,
     type: 'image',
-    imageUrl: 'https://www.lakshita.com/cdn/shop/files/DESKTOP_copy_f1d2e77c-9499-47ae-bcaf-1ec3f7b78c2b.jpg?v=1793333460&width=1800',
-    subtitle: 'NEW IN STOCK',
-    title: 'Spring Symphony 2025',
-    description: 'Breathable linens, fluid cottons, and blooming hand-printed motifs.',
-    ctaText: 'VIEW LOOKBOOK',
-    link: '#collections'
+    imageUrl: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1800&auto=format&fit=crop',
+    subtitle: 'FOOTWEAR & SHOES COLLECTION',
+    title: 'Artisanal Juttis & Designer Footwear',
+    description: 'Handcrafted leather moojris, embellished party juttis, and contemporary comfort footwear.',
+    ctaText: 'SHOP SHOES'
+  },
+  {
+    id: 4,
+    type: 'image',
+    imageUrl: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=1800&auto=format&fit=crop',
+    subtitle: 'MEN & WOMEN SHIRTS & TEES',
+    title: 'Pure Breathable Cotton & Linen Fits',
+    description: 'Relaxed oversized tees, classic polos, and sharp tailored shirts crafted for everyday luxury.',
+    ctaText: 'SHOP SHIRTS & TEES'
   }
 ]
 
 export const CATEGORIES: Category[] = [
   {
-    id: 'suit-sets',
-    name: 'Suit Sets',
+    id: 'lady-garments',
+    name: 'Lady Garments',
+    categoryKey: 'Lady Garments',
     image: 'https://www.lakshita.com/cdn/shop/files/Suit_sets_ab028390-b35b-4cb7-ad7b-2c34b2af6584.jpg?v=1791555315&width=800',
-    itemCount: '120+ Styles',
-    tagline: 'Complete 3-Piece Elegance'
+    itemCount: '7+ Styles',
+    tagline: 'Suits, Kurtas & Sets'
   },
   {
-    id: 'kurta-sets',
-    name: 'Kurta Sets',
-    image: 'https://www.lakshita.com/cdn/shop/files/kurta_sets_26d84f5b-c3d3-4e39-8090-a913a7a1def4.jpg?v=1791555315&width=800',
-    itemCount: '95+ Styles',
-    tagline: 'Contemporary & Classic'
+    id: 'shoes',
+    name: 'Shoes & Footwear',
+    categoryKey: 'Shoes',
+    image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=800&auto=format&fit=crop',
+    itemCount: '7+ Styles',
+    tagline: 'Juttis, Heels & Mules'
   },
   {
-    id: 'coord-sets',
-    name: 'Co-ord Sets',
-    image: 'https://www.lakshita.com/cdn/shop/files/Co-ord_sets_f51d14df-5d99-47cc-b719-b81986e33bef.jpg?v=1791555315&width=800',
-    itemCount: '60+ Styles',
-    tagline: 'Modern Chic Comfort'
+    id: 'tshirts',
+    name: 'T-Shirts',
+    categoryKey: 'T-Shirts',
+    image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop',
+    itemCount: '7+ Styles',
+    tagline: 'Oversized & Classic Tees'
   },
   {
-    id: 'kurtas',
-    name: 'Kurtas & Kurtis',
-    image: 'https://www.lakshita.com/cdn/shop/files/kurtas_kurtis_08aa992c-72cc-416c-b194-1e0ea418640b.jpg?v=1791555315&width=800',
-    itemCount: '180+ Styles',
-    tagline: 'Daily Everyday Glam'
-  },
-  {
-    id: 'dresses',
-    name: 'Dresses & Tunics',
-    image: 'https://www.lakshita.com/cdn/shop/files/1_d208b808-4580-4b85-8d98-aeba703d6c86.jpg?v=1791555315&width=800',
-    itemCount: '45+ Styles',
-    tagline: 'Indo-Western Fusion'
-  },
-  {
-    id: 'bottoms',
-    name: 'Bottoms & Pants',
-    image: 'https://www.lakshita.com/cdn/shop/files/3_b1b00766-e76f-486b-aef9-9be024337018.jpg?v=1791555315&width=800',
-    itemCount: '50+ Styles',
-    tagline: 'Palazzos, Pants & Salwars'
-  }
-]
-
-export const CELEBRITY_LOOKS: CelebrityLook[] = [
-  {
-    name: 'Neeru Bajwa',
-    role: 'Actor & Producer',
-    image: 'https://www.lakshita.com/cdn/shop/files/Neeru_Bajwa_jpg.jpg',
-    outfitTitle: 'Varnika Royal Purple Velvet Set',
-    price: 6995
-  },
-  {
-    name: 'Gauahar Khan',
-    role: 'Bollywood Celebrity',
-    image: 'https://www.lakshita.com/cdn/shop/files/Gauahar_Khan.jpg_2.jpg',
-    outfitTitle: 'Shreya Red Embroidered Velvet Set',
-    price: 8495
-  },
-  {
-    name: 'Rasha Thadani',
-    role: 'Youth Icon & Artist',
-    image: 'https://www.lakshita.com/cdn/shop/files/Rasha_Thadani.jpg',
-    outfitTitle: 'Pihu Mulberry Purple Suit Set',
-    price: 7495
-  },
-  {
-    name: 'Parul Gulati',
-    role: 'Entrepreneur & Actor',
-    image: 'https://www.lakshita.com/cdn/shop/files/Parul_Gulati.jpg',
-    outfitTitle: 'Vritika Shamrock Green Suit Set',
-    price: 6395
+    id: 'shirts',
+    name: 'Shirts',
+    categoryKey: 'Shirts',
+    image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop',
+    itemCount: '7+ Styles',
+    tagline: 'Pure Linen & Cotton Shirts'
   }
 ]
 
 export const PRODUCTS: Product[] = [
+  // ===================== LADY GARMENTS (7 Products) =====================
   {
-    id: 'prod-1',
+    id: 'lg-1',
     title: 'Varnika Royal Purple Embroidered Velvet Kurta Set',
-    category: 'Kurta Sets',
+    category: 'Lady Garments',
     price: 6995,
     originalPrice: 8995,
     discount: 22,
     image: 'https://www.lakshita.com/cdn/shop/files/1_880480f9-27cb-4c42-bc34-49aa348ca7ae.jpg',
     hoverImage: 'https://www.lakshita.com/cdn/shop/files/202681.jpg',
-    description: 'Curated with rich royal micro-velvet, embellished with intricate zari embroidery, sequins, and scalloped hemline. Paired with coordinating velvet straight trousers and organza dupatta.',
+    description: 'Rich royal micro-velvet kurta adorned with golden zari work, matching straight pants, and organza dupatta.',
     fabric: 'Micro Velvet & Organza',
     fit: 'Regular Tailored Fit',
     sizes: ['S', 'M', 'L', 'XL', 'XXL', '3XL'],
@@ -163,15 +122,15 @@ export const PRODUCTS: Product[] = [
     reviewsCount: 142
   },
   {
-    id: 'prod-2',
-    title: 'Shreya Red Embroidered Velvet Suit Set',
-    category: 'Suit Sets',
+    id: 'lg-2',
+    title: 'Shreya Crimson Red Embroidered Velvet Suit Set',
+    category: 'Lady Garments',
     price: 8495,
     originalPrice: 10495,
     discount: 19,
     image: 'https://www.lakshita.com/cdn/shop/files/202681.jpg',
     hoverImage: 'https://www.lakshita.com/cdn/shop/files/1_cc2464d0-3cf1-43c7-ba19-6664085d4982.jpg',
-    description: 'A crimson royal bridal masterpiece featuring floral tilla threadwork, sweetheart neck detail, velvet churidar pants, and a heavily embroidered contrasting dupatta.',
+    description: 'Anarkali flared bridal festive suit set with intricate Kashmiri floral embroidery and contrasting dupatta.',
     fabric: 'Pure Silk Velvet',
     fit: 'Anarkali Flared Fit',
     sizes: ['M', 'L', 'XL', 'XXL'],
@@ -181,16 +140,16 @@ export const PRODUCTS: Product[] = [
     reviewsCount: 98
   },
   {
-    id: 'prod-3',
+    id: 'lg-3',
     title: 'Shreya Teal Blue Embroidered Velvet Suit Set',
-    category: 'Suit Sets',
+    category: 'Lady Garments',
     price: 7495,
     originalPrice: 9495,
     discount: 21,
     image: 'https://www.lakshita.com/cdn/shop/files/203184.jpg',
     hoverImage: 'https://www.lakshita.com/cdn/shop/files/203235.jpg',
-    description: 'Imbued with ocean teal hue, this outfit brings traditional Kashmiri floral motifs to life on premium velvet with silver zari accents and woven borders.',
-    fabric: 'Opulent Silk Velvet',
+    description: 'Ocean teal festive velvet kurta set featuring floral tilla needlework and scalloped sheer sleeves.',
+    fabric: 'Silk Velvet Blend',
     fit: 'Straight Cut',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     isBestSeller: false,
@@ -199,15 +158,15 @@ export const PRODUCTS: Product[] = [
     reviewsCount: 65
   },
   {
-    id: 'prod-4',
-    title: 'Pihu Mulberry Purple Embroidered Velvet Suit Set',
-    category: 'Suit Sets',
+    id: 'lg-4',
+    title: 'Pihu Mulberry Purple Embroidered Suit Set',
+    category: 'Lady Garments',
     price: 7995,
     originalPrice: 9995,
     discount: 20,
     image: 'https://www.lakshita.com/cdn/shop/files/203235.jpg',
     hoverImage: 'https://www.lakshita.com/cdn/shop/files/1_880480f9-27cb-4c42-bc34-49aa348ca7ae.jpg',
-    description: 'A breathtaking mulberry purple silhouette tailored for festive evenings and wedding cocktail nights with handcrafted sequins on neckline and sleeves.',
+    description: 'Mulberry tone festive ensemble crafted with golden resham work for wedding cocktail nights.',
     fabric: 'Velvet with Silk Dupatta',
     fit: 'Relaxed Luxe Fit',
     sizes: ['S', 'M', 'L', 'XL', 'XXL', '3XL'],
@@ -217,71 +176,35 @@ export const PRODUCTS: Product[] = [
     reviewsCount: 110
   },
   {
-    id: 'prod-5',
-    title: 'Riddhi Espresso Brown Embroidered Velvet Suit Set',
-    category: 'Suit Sets',
-    price: 6395,
-    originalPrice: 7995,
-    discount: 20,
-    image: 'https://www.lakshita.com/cdn/shop/files/1_f90d9e1e-e3e8-4ced-b740-08660c07581a.jpg',
-    hoverImage: 'https://www.lakshita.com/cdn/shop/files/1_e083d23a-6d07-45d8-b9ca-d6705906fb36.jpg',
-    description: 'Warm, earthy espresso brown velvet accented with antique gold embroidery. Designed for refined subtlety and all-day comfort during winter festivities.',
-    fabric: 'Fine Micro Velvet',
-    fit: 'Straight Silhouette',
-    sizes: ['M', 'L', 'XL', 'XXL'],
-    isBestSeller: false,
-    isNew: true,
-    rating: 4.7,
-    reviewsCount: 48
-  },
-  {
-    id: 'prod-6',
-    title: 'Riddhi Regal Violet Embroidered Velvet Suit Set',
-    category: 'Suit Sets',
-    price: 6595,
-    originalPrice: 8495,
-    discount: 22,
-    image: 'https://www.lakshita.com/cdn/shop/files/1_e083d23a-6d07-45d8-b9ca-d6705906fb36.jpg',
-    hoverImage: 'https://www.lakshita.com/cdn/shop/files/1_f90d9e1e-e3e8-4ced-b740-08660c07581a.jpg',
-    description: 'Enchanting regal violet tone enriched with fine golden threadwork across neckline, borders, and dupatta. Finished with dainty tassels.',
-    fabric: 'Silk Velvet Blend',
-    fit: 'Comfort Fit',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    isBestSeller: false,
-    isNew: false,
-    rating: 4.8,
-    reviewsCount: 76
-  },
-  {
-    id: 'prod-7',
-    title: 'Vritika Shamrock Green Embroidered Suit Set',
-    category: 'Kurta Sets',
+    id: 'lg-5',
+    title: 'Vritika Shamrock Green Chanderi Suit Set',
+    category: 'Lady Garments',
     price: 6195,
     originalPrice: 7995,
     discount: 22,
     image: 'https://www.lakshita.com/cdn/shop/files/1_7a0c7e1b-3a09-40a7-a168-3607a314cf47.png',
     hoverImage: 'https://www.lakshita.com/cdn/shop/files/1_865692c5-ca6e-4cd9-93e3-b4cef2d0ef9b.png',
-    description: 'Vibrant emerald green kurta with traditional floral boota work and sheer organza sleeve cuffs. Accompanied by silk trousers and a printed stole.',
+    description: 'Emerald green silk Chanderi kurta with hand-embroidered neckline, slim trousers, and printed dupatta.',
     fabric: 'Chanderi Silk & Organza',
     fit: 'Flared A-Line',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL', '3XL'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     isBestSeller: true,
     isNew: true,
     rating: 4.9,
     reviewsCount: 189
   },
   {
-    id: 'prod-8',
-    title: 'Pranika Black Pearl Embroidered Anarkali Suit Set',
-    category: 'Suit Sets',
+    id: 'lg-6',
+    title: 'Pranika Black Pearl Flared Anarkali Suit Set',
+    category: 'Lady Garments',
     price: 8995,
     originalPrice: 11995,
     discount: 25,
     image: 'https://www.lakshita.com/cdn/shop/files/201980.jpg',
     hoverImage: 'https://www.lakshita.com/cdn/shop/files/202681.jpg',
-    description: 'Majestic midnight black Anarkali adorned with subtle pearl beading and resham embroidery. Features 24 kalis that drape into a dramatic, regal flare.',
+    description: '24-kali midnight black flared Anarkali embellished with hand-stitched pearl beads and resham work.',
     fabric: 'Georgette & Shantoon Silk',
-    fit: 'Grand Anarkali',
+    fit: 'Grand Kalidar Anarkali',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     isBestSeller: true,
     isNew: false,
@@ -289,145 +212,405 @@ export const PRODUCTS: Product[] = [
     reviewsCount: 215
   },
   {
-    id: 'prod-9',
-    title: 'Devika Dark Red Embroidered Suit Set',
-    category: 'Suit Sets',
-    price: 6995,
-    originalPrice: 8795,
-    discount: 20,
-    image: 'https://www.lakshita.com/cdn/shop/files/1_cc2464d0-3cf1-43c7-ba19-6664085d4982.jpg',
-    hoverImage: 'https://www.lakshita.com/cdn/shop/files/202681.jpg',
-    description: 'Sensational crimson red kurta set crafted for Haldi, Mehendi, and Karwa Chauth. Subtle hand-sequin embellishments that reflect festive candlelight.',
-    fabric: 'Pure Viscose Silk',
-    fit: 'Regular Fit',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL', '3XL'],
-    isBestSeller: false,
-    isNew: true,
-    rating: 4.7,
-    reviewsCount: 52
-  },
-  {
-    id: 'prod-10',
-    title: 'Misha Wine Maroon Embroidered Anarkali Kurta Set',
-    category: 'Kurta Sets',
+    id: 'lg-7',
+    title: 'Misha Wine Maroon Embroidered Anarkali Set',
+    category: 'Lady Garments',
     price: 7495,
     originalPrice: 9495,
     discount: 21,
     image: 'https://www.lakshita.com/cdn/shop/files/2_40f26b21-4df8-4776-88e8-d0e311203ca1.jpg',
     hoverImage: 'https://www.lakshita.com/cdn/shop/files/1_880480f9-27cb-4c42-bc34-49aa348ca7ae.jpg',
-    description: 'Deep wine tones paired with intricate gota-patti and threadwork. Includes a flared Anarkali kurta, matching cigarette pants, and a dual-shade organza dupatta.',
+    description: 'Deep wine festive Anarkali with intricate gota-patti and mirror embroidery on neckline and hem.',
     fabric: 'Silk Chanderi',
-    fit: 'Flared Kalidar',
+    fit: 'Flared Fit',
     sizes: ['M', 'L', 'XL', 'XXL', '3XL'],
-    isBestSeller: true,
-    isNew: true,
-    rating: 4.9,
-    reviewsCount: 134
-  },
-  {
-    id: 'prod-11',
-    title: 'Vritika Persian Pink Embroidered Suit Set',
-    category: 'Suit Sets',
-    price: 6495,
-    originalPrice: 8195,
-    discount: 20,
-    image: 'https://www.lakshita.com/cdn/shop/files/1_865692c5-ca6e-4cd9-93e3-b4cef2d0ef9b.png',
-    hoverImage: 'https://www.lakshita.com/cdn/shop/files/1_7a0c7e1b-3a09-40a7-a168-3607a314cf47.png',
-    description: 'Delicate Persian pink embroidered ensemble evoking spring romance. Adorned with pastel floral stitches and scalloped organza dupatta.',
-    fabric: 'Chanderi Silk Blend',
-    fit: 'Regular Fit',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     isBestSeller: false,
     isNew: true,
     rating: 4.8,
     reviewsCount: 88
   },
+
+  // ===================== SHOES & FOOTWEAR (7 Products) =====================
   {
-    id: 'prod-12',
-    title: 'Ishita Pastel Pink Embroidered Suit Set',
-    category: 'Suit Sets',
-    price: 5995,
-    originalPrice: 7495,
-    discount: 20,
-    image: 'https://www.lakshita.com/cdn/shop/files/3_a5e80c16-439f-4fe7-96f5-4adbcf36e7b3.jpg',
-    hoverImage: 'https://www.lakshita.com/cdn/shop/files/1_865692c5-ca6e-4cd9-93e3-b4cef2d0ef9b.png',
-    description: 'Effortlessly feminine and soothing pastel pink suit set featuring floral vine embroidery on yoke and hemline. Perfectly suited for daytime celebrations.',
-    fabric: 'Pure Cotton Silk',
-    fit: 'Straight Cut',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL', '3XL'],
+    id: 'sh-1',
+    title: 'Royal Zari Embroidered Golden Bridal Jutti',
+    category: 'Shoes',
+    price: 2495,
+    originalPrice: 3495,
+    discount: 28,
+    image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=800&auto=format&fit=crop',
+    description: 'Handcrafted pure leather base Punjabi jutti adorned with gold dabka, sequins, and pearl hand-embroidery. Cushioned double-padded insole.',
+    fabric: 'Genuine Leather & Silk Embroidery',
+    fit: 'Snug Comfort Fit (Stretchable)',
+    sizes: ['36', '37', '38', '39', '40', '41'],
+    isBestSeller: true,
+    isNew: true,
+    rating: 4.9,
+    reviewsCount: 164
+  },
+  {
+    id: 'sh-2',
+    title: 'Velvet Midnight Black Embellished Mules',
+    category: 'Shoes',
+    price: 2995,
+    originalPrice: 3995,
+    discount: 25,
+    image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=800&auto=format&fit=crop',
+    description: 'Slip-on luxury black velvet pointed mules featuring silver rhinestone buckles and low block heels for party evenings.',
+    fabric: 'Plush Velvet & Synthetic Sole',
+    fit: 'Pointed Toe Slip-On',
+    sizes: ['37', '38', '39', '40'],
+    isBestSeller: true,
+    isNew: true,
+    rating: 4.8,
+    reviewsCount: 82
+  },
+  {
+    id: 'sh-3',
+    title: 'Pastel Floral Hand-Painted Kolhapuri Flats',
+    category: 'Shoes',
+    price: 1895,
+    originalPrice: 2495,
+    discount: 24,
+    image: 'https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=800&auto=format&fit=crop',
+    description: 'Traditional Kolhapuri T-strap toe sandals finished with modern pastel floral motif hand-painting and braided trim.',
+    fabric: 'Soft Vegan Leather',
+    fit: 'Flat Open Toe',
+    sizes: ['36', '37', '38', '39', '40', '41'],
+    isBestSeller: false,
+    isNew: true,
+    rating: 4.7,
+    reviewsCount: 54
+  },
+  {
+    id: 'sh-4',
+    title: 'Classic White Chunky Platform Sneakers',
+    category: 'Shoes',
+    price: 3495,
+    originalPrice: 4995,
+    discount: 30,
+    image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?q=80&w=800&auto=format&fit=crop',
+    description: 'Ultra-cushioned everyday platform lifestyle sneakers with memory foam insole and lightweight EVA grip sole.',
+    fabric: 'Breathable PU Leather & Mesh',
+    fit: 'Cushioned Regular Fit',
+    sizes: ['38', '39', '40', '41', '42', '43'],
+    isBestSeller: true,
+    isNew: false,
+    rating: 4.9,
+    reviewsCount: 220
+  },
+  {
+    id: 'sh-5',
+    title: 'Rose Gold Metallic Block Heel Sandals',
+    category: 'Shoes',
+    price: 2795,
+    originalPrice: 3695,
+    discount: 24,
+    image: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=800&auto=format&fit=crop',
+    description: '2.5 inch sturdy block heel open-toe sandals with metallic rose gold ankle strap. Ideal for sarees and festive suits.',
+    fabric: 'Metallic Vegan Leather',
+    fit: 'Block Heel 2.5 Inch',
+    sizes: ['36', '37', '38', '39', '40'],
+    isBestSeller: false,
+    isNew: true,
+    rating: 4.6,
+    reviewsCount: 39
+  },
+  {
+    id: 'sh-6',
+    title: 'Heritage Tan Leather Brogues & Loafers',
+    category: 'Shoes',
+    price: 3995,
+    originalPrice: 5495,
+    discount: 27,
+    image: 'https://images.unsplash.com/photo-1533867617858-e7b97e060509?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=800&auto=format&fit=crop',
+    description: 'Hand-burnished genuine leather penny loafers with anti-skid rubber sole and padded arch support.',
+    fabric: 'Full Grain Leather',
+    fit: 'Standard Loafer Fit',
+    sizes: ['39', '40', '41', '42', '43', '44'],
     isBestSeller: false,
     isNew: false,
+    rating: 4.8,
+    reviewsCount: 91
+  },
+  {
+    id: 'sh-7',
+    title: 'Emerald Green Kundan Embroidered Jutti',
+    category: 'Shoes',
+    price: 2695,
+    originalPrice: 3495,
+    discount: 23,
+    image: 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=800&auto=format&fit=crop',
+    description: 'Intricately studded with faux Kundan stones and green resham threadwork on raw silk base.',
+    fabric: 'Raw Silk & Leather Sole',
+    fit: 'Traditional Jutti Fit',
+    sizes: ['36', '37', '38', '39', '40'],
+    isBestSeller: true,
+    isNew: true,
+    rating: 5.0,
+    reviewsCount: 77
+  },
+
+  // ===================== T-SHIRTS (7 Products) =====================
+  {
+    id: 'ts-1',
+    title: 'Heavyweight Cotton Oversized Drop-Shoulder T-Shirt',
+    category: 'T-Shirts',
+    price: 1295,
+    originalPrice: 1895,
+    discount: 31,
+    image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop',
+    description: '240 GSM ultra-soft comb-spun French Terry cotton oversized tee with rib neck collar and aesthetic boxy silhouette.',
+    fabric: '100% Combed Cotton (240 GSM)',
+    fit: 'Relaxed Oversized Fit',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    isBestSeller: true,
+    isNew: true,
+    rating: 4.9,
+    reviewsCount: 245
+  },
+  {
+    id: 'ts-2',
+    title: 'Signature Minimal Embroidered Crewneck Tee - Sage Green',
+    category: 'T-Shirts',
+    price: 995,
+    originalPrice: 1495,
+    discount: 33,
+    image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop',
+    description: 'Subtle tone-on-tone chest embroidery with biowash treatment for ultra-smooth hand-feel and zero shrinkage.',
+    fabric: '100% Bio-Washed Cotton',
+    fit: 'Regular Fit',
+    sizes: ['S', 'M', 'L', 'XL'],
+    isBestSeller: true,
+    isNew: false,
+    rating: 4.8,
+    reviewsCount: 130
+  },
+  {
+    id: 'ts-3',
+    title: 'Vintage Acid Wash Charcoal Graphic Streetwear Tee',
+    category: 'T-Shirts',
+    price: 1495,
+    originalPrice: 1995,
+    discount: 25,
+    image: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop',
+    description: 'Individually dyed mineral-washed distressed graphic tee featuring high-density typography print on chest.',
+    fabric: 'Heavyweight Single Jersey',
+    fit: 'Baggy Streetwear Fit',
+    sizes: ['M', 'L', 'XL', 'XXL'],
+    isBestSeller: false,
+    isNew: true,
+    rating: 4.7,
+    reviewsCount: 78
+  },
+  {
+    id: 'ts-4',
+    title: 'Textured Waffle Knit Pique Polo T-Shirt - Cream',
+    category: 'T-Shirts',
+    price: 1595,
+    originalPrice: 2195,
+    discount: 27,
+    image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop',
+    description: 'Sophisticated resort-collar waffle textured knit polo t-shirt. Breathable fabric that retains its shape.',
+    fabric: 'Cotton Waffle Knit Blend',
+    fit: 'Smart Casual Regular Fit',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    isBestSeller: true,
+    isNew: true,
+    rating: 4.9,
+    reviewsCount: 195
+  },
+  {
+    id: 'ts-5',
+    title: 'Solid Jet Black Supima Cotton Everyday T-Shirt',
+    category: 'T-Shirts',
+    price: 1095,
+    originalPrice: 1495,
+    discount: 27,
+    image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=800&auto=format&fit=crop',
+    description: 'Long-staple Supima luxury cotton delivering unmatched softness, deep rich black luster, and lasting durability.',
+    fabric: '100% Supima Cotton',
+    fit: 'Tailored Slim Fit',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    isBestSeller: false,
+    isNew: false,
+    rating: 4.8,
+    reviewsCount: 160
+  },
+  {
+    id: 'ts-6',
+    title: 'French Terry Striped Nautical Breton Tee',
+    category: 'T-Shirts',
+    price: 1395,
+    originalPrice: 1795,
+    discount: 22,
+    image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?q=80&w=800&auto=format&fit=crop',
+    description: 'Classic horizontal yarn-dyed navy and off-white maritime stripes with side split seams.',
+    fabric: 'Yarn-Dyed Organic Cotton',
+    fit: 'Comfort Fit',
+    sizes: ['M', 'L', 'XL'],
+    isBestSeller: false,
+    isNew: true,
     rating: 4.6,
     reviewsCount: 42
   },
   {
-    id: 'prod-13',
-    title: 'Emerald Green Vanya Multilayer Bead Necklace',
-    category: 'Jewellery',
-    price: 1995,
-    originalPrice: 2495,
-    discount: 20,
-    image: 'https://www.lakshita.com/cdn/shop/files/1_d5397157-0fb7-4e35-841c-48faccf4b572.jpg',
-    hoverImage: 'https://www.lakshita.com/cdn/shop/files/1_941dddb6-4b48-49b9-aa0e-c8e4947495e4.jpg',
-    description: 'Handcrafted multilayer faux emerald glass beads connected with gold-plated filigree accents. Elevates any ethnic neckline with royal charm.',
-    fabric: 'Brass & High-Grade Glass Beads',
-    fit: 'Adjustable Dori',
-    sizes: ['One Size'],
+    id: 'ts-7',
+    title: 'Lavender Pastel Relaxed Mock-Neck Tee',
+    category: 'T-Shirts',
+    price: 1195,
+    originalPrice: 1695,
+    discount: 29,
+    image: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop',
+    description: 'Minimalist high mock-collar tee with dropped armholes and ribbed hem detail.',
+    fabric: '100% Mercerized Cotton',
+    fit: 'Relaxed Fit',
+    sizes: ['S', 'M', 'L', 'XL'],
+    isBestSeller: false,
+    isNew: false,
+    rating: 4.7,
+    reviewsCount: 61
+  },
+
+  // ===================== SHIRTS (7 Products) =====================
+  {
+    id: 'sr-1',
+    title: 'Pure French Linen Resort Shirt - Olive Green',
+    category: 'Shirts',
+    price: 2495,
+    originalPrice: 3495,
+    discount: 28,
+    image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800&auto=format&fit=crop',
+    description: '100% natural European flax linen shirt featuring camp collar, coconut shell buttons, and garment-washed finish.',
+    fabric: '100% Pure Flax Linen',
+    fit: 'Relaxed Resort Fit',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     isBestSeller: true,
     isNew: true,
     rating: 4.9,
-    reviewsCount: 67
+    reviewsCount: 156
   },
   {
-    id: 'prod-14',
-    title: 'Meher Amethyst Druzy Crystal Necklace',
-    category: 'Jewellery',
+    id: 'sr-2',
+    title: 'Classic White Egyptian Giza Cotton Formal Shirt',
+    category: 'Shirts',
     price: 2195,
-    originalPrice: 2795,
-    discount: 21,
-    image: 'https://www.lakshita.com/cdn/shop/files/1_941dddb6-4b48-49b9-aa0e-c8e4947495e4.jpg',
-    hoverImage: 'https://www.lakshita.com/cdn/shop/files/1_d5397157-0fb7-4e35-841c-48faccf4b572.jpg',
-    description: 'Natural amethyst tone druzy stone encased in 18k gold micropolish. Contemporary artisanal touch for classic sarees and modern suits.',
-    fabric: 'Gold Plated Alloy & Natural Druzy',
-    fit: 'Adjustable Clasp',
-    sizes: ['One Size'],
+    originalPrice: 2995,
+    discount: 26,
+    image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop',
+    description: 'High-twist Egyptian Giza satin weave cotton formal shirt. Crisp cutaway spread collar with mother-of-pearl buttons.',
+    fabric: '100% Giza Cotton (Satin Weave)',
+    fit: 'Slim Tailored Fit',
+    sizes: ['38', '39', '40', '42', '44'],
+    isBestSeller: true,
+    isNew: false,
+    rating: 5.0,
+    reviewsCount: 280
+  },
+  {
+    id: 'sr-3',
+    title: 'Mandarin Collar Hand-Spun Khadi Linen Shirt',
+    category: 'Shirts',
+    price: 1995,
+    originalPrice: 2695,
+    discount: 25,
+    image: 'https://images.unsplash.com/photo-1589310243389-96a5483213a8?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop',
+    description: 'Artisanal handwoven khadi cotton with clean Chinese bandh collar. Naturally cooling and breathable for warm climates.',
+    fabric: 'Handwoven Khadi Cotton',
+    fit: 'Comfort Straight Fit',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    isBestSeller: false,
+    isNew: true,
+    rating: 4.8,
+    reviewsCount: 89
+  },
+  {
+    id: 'sr-4',
+    title: 'Indigo Block-Printed Bohemian Casual Shirt',
+    category: 'Shirts',
+    price: 1795,
+    originalPrice: 2395,
+    discount: 25,
+    image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1589310243389-96a5483213a8?q=80&w=800&auto=format&fit=crop',
+    description: 'Handcrafted with natural indigo dabu block prints by Rajasthani artisans on lightweight voile cotton.',
+    fabric: '100% Cotton Voile',
+    fit: 'Relaxed Casual Fit',
+    sizes: ['S', 'M', 'L', 'XL'],
+    isBestSeller: true,
+    isNew: true,
+    rating: 4.7,
+    reviewsCount: 112
+  },
+  {
+    id: 'sr-5',
+    title: 'Heritage Navy Oxford Button-Down Shirt',
+    category: 'Shirts',
+    price: 2295,
+    originalPrice: 2995,
+    discount: 23,
+    image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800&auto=format&fit=crop',
+    description: 'Timeless heavy basketweave Oxford cloth shirt with button-down collar, chest pocket, and curved hem.',
+    fabric: '100% Oxford Cotton',
+    fit: 'Standard Regular Fit',
+    sizes: ['38', '40', '42', '44'],
     isBestSeller: false,
     isNew: false,
     rating: 4.8,
-    reviewsCount: 39
+    reviewsCount: 147
+  },
+  {
+    id: 'sr-6',
+    title: 'Oatmeal Beige Textured Cuban Collar Shirt',
+    category: 'Shirts',
+    price: 1895,
+    originalPrice: 2495,
+    discount: 24,
+    image: 'https://images.unsplash.com/photo-1589310243389-96a5483213a8?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop',
+    description: 'Vintage retro camp collar shirt made from textured slub cotton with wooden buttons and front patch pocket.',
+    fabric: '100% Textured Cotton Slub',
+    fit: 'Boxy Casual Fit',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    isBestSeller: false,
+    isNew: true,
+    rating: 4.7,
+    reviewsCount: 63
+  },
+  {
+    id: 'sr-7',
+    title: 'Black Satin Silk Finish Evening Party Shirt',
+    category: 'Shirts',
+    price: 2795,
+    originalPrice: 3795,
+    discount: 26,
+    image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800&auto=format&fit=crop',
+    hoverImage: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop',
+    description: 'Luxurious pitch black fluid satin shirt with concealed button placket. Drapes smoothly for evening cocktail parties.',
+    fabric: 'Silk Satin Viscose',
+    fit: 'Draped Modern Fit',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    isBestSeller: true,
+    isNew: true,
+    rating: 4.9,
+    reviewsCount: 174
   }
 ]
-
-export const BRAND_PROMISES = [
-  {
-    title: '25+ Years of Trust',
-    desc: 'Generations of women trust our signature fit and quality.',
-    icon: 'ShieldCheck'
-  },
-  {
-    title: 'In-House Craftsmanship',
-    desc: 'Designed by master artisans with precision zari & resham work.',
-    icon: 'Sparkles'
-  },
-  {
-    title: 'Signature Embroidery',
-    desc: 'Intricate Kashmiri, Gota Patti, and Zardozi needlework.',
-    icon: 'Scissors'
-  },
-  {
-    title: 'Inclusive Sizing (XS - 4XL)',
-    desc: 'Tailored for every silhouette with flattering cuts.',
-    icon: 'UserCheck'
-  },
-  {
-    title: 'Free Lifetime Alterations',
-    desc: 'Complimentary fit adjustments across all brand stores.',
-    icon: 'RefreshCw'
-  },
-  {
-    title: 'Express Same-Day Dispatch',
-    desc: 'Fast express shipping with insured transit across India.',
-    icon: 'Truck'
-  }
-]
-

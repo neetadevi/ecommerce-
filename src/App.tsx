@@ -1,26 +1,25 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Header } from './components/Header'
 import { HeroBanner } from './components/HeroBanner'
 import { CategoryGrid } from './components/CategoryGrid'
 import { ProductCard } from './components/ProductCard'
-import { CelebrityCloset } from './components/CelebrityCloset'
-import { BrandPromise } from './components/BrandPromise'
 import { Footer } from './components/Footer'
 import { ProductModal } from './components/ProductModal'
-import { CartDrawer, CartItem } from './components/CartDrawer'
+import { CartDrawer, type CartItem } from './components/CartDrawer'
 import { WishlistDrawer } from './components/WishlistDrawer'
 import { AuthModal } from './components/AuthModal'
 import { CheckoutModal } from './components/CheckoutModal'
 import { SearchModal } from './components/SearchModal'
-import { PRODUCTS, Product } from './data/mockData'
+import { PRODUCTS, type Product } from './data/mockData'
 import { supabase } from './lib/supabase'
-import { Filter, SlidersHorizontal, Sparkles, CheckCircle2 } from 'lucide-react'
+import { SlidersHorizontal, ChevronDown, ChevronUp } from 'lucide-react'
 
 export function App() {
   // Category & Filter states
   const [activeCategory, setActiveCategory] = useState<string>('All')
   const [filterTag, setFilterTag] = useState<string>('all')
   const [sortBy, setSortBy] = useState<string>('featured')
+  const [visibleCount, setVisibleCount] = useState<number>(4) // Default 4 products shown
 
   // Modals & Drawers state
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false)
@@ -42,7 +41,7 @@ export function App() {
       quantity: 1
     }
   ])
-  const [wishlistItems, setWishlistItems] = useState<Product[]>([PRODUCTS[1]])
+  const [wishlistItems, setWishlistItems] = useState<Product[]>([PRODUCTS[7]])
 
   // Supabase User Session state
   const [userEmail, setUserEmail] = useState<string | null>(null)
@@ -75,6 +74,14 @@ export function App() {
     }
   }, [])
 
+  // When category changes, reset visible count to 4
+  const handleSelectCategory = (cat: string) => {
+    setActiveCategory(cat)
+    setFilterTag('all')
+    setVisibleCount(4)
+    document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   // Cart Operations
   const handleAddToCart = (product: Product, size: string, quantity: number = 1) => {
     setCartItems(prev => {
@@ -88,6 +95,12 @@ export function App() {
       }
       return [...prev, { product, size, quantity }]
     })
+  }
+
+  // Direct Buy Now: adds to cart & opens checkout instantly
+  const handleBuyNow = (product: Product, size: string, quantity: number = 1) => {
+    handleAddToCart(product, size, quantity)
+    setIsCheckoutOpen(true)
   }
 
   const handleUpdateQuantity = (productId: string, size: string, newQty: number) => {
@@ -124,13 +137,9 @@ export function App() {
     let result = [...PRODUCTS]
 
     // Category filter
-    if (activeCategory === 'New Launch') {
-      result = result.filter(p => p.isNew)
-    } else if (activeCategory === 'Velvets') {
-      result = result.filter(p => p.fabric.toLowerCase().includes('velvet') || p.title.toLowerCase().includes('velvet'))
-    } else if (activeCategory === 'Sale') {
-      result = result.filter(p => p.discount >= 20)
-    } else if (activeCategory !== 'All' && activeCategory !== 'Celebrity') {
+    if (activeCategory === 'Sale') {
+      result = result.filter(p => p.discount >= 25)
+    } else if (activeCategory !== 'All') {
       result = result.filter(p => p.category === activeCategory)
     }
 
@@ -139,12 +148,8 @@ export function App() {
       result = result.filter(p => p.isBestSeller)
     } else if (filterTag === 'new') {
       result = result.filter(p => p.isNew)
-    } else if (filterTag === 'velvets') {
-      result = result.filter(p => p.fabric.toLowerCase().includes('velvet') || p.title.toLowerCase().includes('velvet'))
-    } else if (filterTag === 'jewels') {
-      result = result.filter(p => p.category === 'Jewellery')
-    } else if (filterTag === 'shaadi') {
-      result = result.filter(p => p.category === 'Suit Sets' || p.category === 'Kurta Sets')
+    } else if (filterTag === 'under2k') {
+      result = result.filter(p => p.price <= 2000)
     }
 
     // Sorting
@@ -159,15 +164,6 @@ export function App() {
     return result
   }, [activeCategory, filterTag, sortBy])
 
-  const handleCelebrityClick = (lookTitle: string) => {
-    const match = PRODUCTS.find(p => p.title.toLowerCase().includes(lookTitle.toLowerCase().split(' ')[0]))
-    if (match) {
-      setModalProduct(match)
-    } else {
-      setModalProduct(PRODUCTS[0])
-    }
-  }
-
   return (
     <div className="min-h-screen flex flex-col bg-white text-neutral-900 font-sans antialiased selection:bg-amber-200 selection:text-neutral-900">
       
@@ -179,14 +175,7 @@ export function App() {
         onOpenWishlist={() => setIsWishlistOpen(true)}
         onOpenAuth={() => setIsAuthOpen(true)}
         onOpenSearch={() => setIsSearchOpen(true)}
-        onSelectCategory={(cat) => {
-          setActiveCategory(cat)
-          if (cat === 'Celebrity') {
-            document.getElementById('celebrity')?.scrollIntoView({ behavior: 'smooth' })
-          } else {
-            document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' })
-          }
-        }}
+        onSelectCategory={handleSelectCategory}
         activeCategory={activeCategory}
         userEmail={userEmail}
         onSignOut={async () => {
@@ -195,74 +184,70 @@ export function App() {
         }}
       />
 
-      {/* Hero Video & Campaign Banner */}
+      {/* Hero Video & Image Slider */}
       <HeroBanner
         onShopClick={() => {
           document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' })
         }}
       />
 
-      {/* Lakshita Category Showcase */}
-      <CategoryGrid
-        onSelectCategory={(catName) => {
-          setActiveCategory(catName)
-          document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' })
-        }}
-      />
+      {/* 4 Categories: Lady Garments, Shoes, T-Shirts, Shirts */}
+      <CategoryGrid onSelectCategory={handleSelectCategory} />
 
       {/* Main Product Catalog Section */}
-      <section id="collections" className="py-16 sm:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="collections" className="py-12 sm:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           
           {/* Section Heading */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-neutral-100 gap-4">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 pb-3 border-b border-neutral-100 gap-3">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-amber-800 font-bold">
-                Festive &amp; Everyday Luxe
+              <p className="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-amber-800 font-bold">
+                Exclusive Collection
               </p>
               <h2 
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                className="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 mt-1"
+                className="text-2xl sm:text-4xl font-bold tracking-tight text-neutral-900 mt-1 uppercase"
               >
-                {activeCategory === 'All' ? 'EXPLORE OUR COLLECTIONS' : activeCategory.toUpperCase()}
+                {activeCategory === 'All' ? 'EXPLORE OUR COLLECTION' : activeCategory}
               </h2>
             </div>
 
             {/* Sort Dropdown */}
             <div className="flex items-center gap-2 self-start md:self-auto">
-              <SlidersHorizontal size={14} className="text-neutral-500" />
-              <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wider">Sort:</span>
+              <SlidersHorizontal size={13} className="text-neutral-500" />
+              <span className="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider">Sort:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="text-xs font-bold text-neutral-900 bg-neutral-50 border border-neutral-200 rounded px-2.5 py-1.5 focus:outline-none focus:border-amber-700 cursor-pointer"
+                className="text-xs font-bold text-neutral-900 bg-neutral-50 border border-neutral-200 rounded px-2 py-1 focus:outline-none focus:border-amber-700 cursor-pointer"
               >
-                <option value="featured">Featured / Newest</option>
+                <option value="featured">Featured / Trending</option>
                 <option value="price-low">Price: Low to High</option>
                 <option value="price-high">Price: High to Low</option>
-                <option value="rating">Highest Rated</option>
+                <option value="rating">Highest Customer Rating</option>
               </select>
             </div>
           </div>
 
-          {/* Quick Filter Tabs matching Lakshita */}
-          <div className="flex items-center gap-3 overflow-x-auto pb-4 mb-8 scrollbar-none border-b border-neutral-100">
+          {/* Quick Filter Tabs */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-6 scrollbar-none border-b border-neutral-100 text-xs">
             {[
-              { id: 'all', label: 'See All' },
-              { id: 'new', label: 'New Launch' },
-              { id: 'bestsellers', label: 'Bestsellers' },
-              { id: 'velvets', label: 'Velvets' },
-              { id: 'jewels', label: 'LK JEWELS' },
-              { id: 'shaadi', label: 'Shaadi Specials' }
+              { id: 'all', label: 'All Items' },
+              { id: 'bestsellers', label: 'Bestsellers 🔥' },
+              { id: 'new', label: 'New Arrivals' },
+              { id: 'under2k', label: 'Under ₹2,000' }
             ].map((f) => (
               <button
                 key={f.id}
                 type="button"
-                onClick={() => setFilterTag(f.id)}
-                className={`whitespace-nowrap px-5 py-2 text-xs uppercase tracking-widest font-bold transition-all cursor-pointer border-b-2 ${
+                onClick={() => {
+                  setFilterTag(f.id)
+                  setVisibleCount(4)
+                }}
+                className={`whitespace-nowrap px-4 py-1.5 text-xs uppercase tracking-wider font-bold rounded-full transition-all cursor-pointer ${
                   filterTag === f.id
-                    ? 'border-neutral-900 text-neutral-900'
-                    : 'border-transparent text-neutral-400 hover:text-neutral-700'
+                    ? 'bg-neutral-900 text-white shadow-xs'
+                    : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
                 }`}
               >
                 {f.label}
@@ -270,9 +255,9 @@ export function App() {
             ))}
           </div>
 
-          {/* Product Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {displayedProducts.map((product) => (
+          {/* Product Grid: 2 columns on mobile (Left and Right side by side!), 4 columns on desktop */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-6">
+            {displayedProducts.slice(0, visibleCount).map((product) => (
               <ProductCard
                 key={product.id}
                 product={product}
@@ -280,19 +265,47 @@ export function App() {
                 onToggleWishlist={handleToggleWishlist}
                 onQuickView={(p) => setModalProduct(p)}
                 onAddToCart={(p, size) => handleAddToCart(p, size, 1)}
+                onBuyNow={(p, size) => handleBuyNow(p, size, 1)}
               />
             ))}
           </div>
 
+          {/* See More / Show Less Button */}
+          {displayedProducts.length > 4 && (
+            <div className="mt-10 text-center">
+              {visibleCount < displayedProducts.length ? (
+                <button
+                  type="button"
+                  onClick={() => setVisibleCount(displayedProducts.length)}
+                  className="px-8 py-3 bg-neutral-900 hover:bg-[#8B1E3F] text-white font-bold text-xs uppercase tracking-[0.2em] rounded-none transition-all shadow-md flex items-center justify-center gap-2 mx-auto cursor-pointer"
+                >
+                  See More ({displayedProducts.length - visibleCount} more items)
+                  <ChevronDown size={15} />
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setVisibleCount(4)
+                    document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' })
+                  }}
+                  className="px-6 py-2.5 border border-neutral-300 hover:border-black text-neutral-800 font-bold text-xs uppercase tracking-wider rounded-none transition-all flex items-center justify-center gap-2 mx-auto cursor-pointer"
+                >
+                  Show Less <ChevronUp size={15} />
+                </button>
+              )}
+            </div>
+          )}
+
           {displayedProducts.length === 0 && (
             <div className="py-16 text-center text-neutral-500 space-y-2">
-              <p className="font-bold text-base">No items found in this category filter</p>
+              <p className="font-bold text-base">No items found in this filter</p>
               <button
                 type="button"
-                onClick={() => { setActiveCategory('All'); setFilterTag('all') }}
-                className="text-xs text-amber-800 font-bold underline"
+                onClick={() => { setActiveCategory('All'); setFilterTag('all'); setVisibleCount(4) }}
+                className="text-xs text-amber-800 font-bold underline cursor-pointer"
               >
-                Reset Filters
+                Reset All Filters
               </button>
             </div>
           )}
@@ -300,14 +313,8 @@ export function App() {
         </div>
       </section>
 
-      {/* Celebrity Closet */}
-      <CelebrityCloset onShopCelebrityLook={handleCelebrityClick} />
-
-      {/* The Brand Promise & Flagship Stores */}
-      <BrandPromise />
-
-      {/* Footer */}
-      <Footer />
+      {/* Footer with Professional Level Design */}
+      <Footer onSelectCategory={handleSelectCategory} />
 
       {/* Interactive Modals & Drawers */}
       <ProductModal
@@ -318,6 +325,9 @@ export function App() {
         onAddToCart={(p, sz, qty) => {
           handleAddToCart(p, sz, qty)
           setIsCartOpen(true)
+        }}
+        onBuyNow={(p, sz, qty) => {
+          handleBuyNow(p, sz, qty)
         }}
       />
 
@@ -369,7 +379,7 @@ export function App() {
         onSelectProduct={(p) => setModalProduct(p)}
       />
 
-      {/* Floating Supabase Connected Indicator Badge */}
+      {/* Live Supabase Connection Pill */}
       <div className="fixed bottom-4 left-4 z-30 hidden sm:flex items-center gap-2 bg-neutral-900/90 backdrop-blur-md text-white text-[11px] font-semibold px-3 py-1.5 rounded-full shadow-lg border border-neutral-700/50">
         <span className={`w-2 h-2 rounded-full ${supabaseConnected ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'}`} />
         <span>Supabase: {supabaseConnected ? 'Connected (Ecommerce)' : 'Connecting...'}</span>

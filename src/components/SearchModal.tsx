@@ -57,7 +57,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         {/* Popular Tags */}
         <div className="flex flex-wrap items-center gap-2 mb-6 text-xs">
           <span className="text-neutral-400 font-semibold text-[11px] uppercase tracking-wider">Popular:</span>
-          {['Velvet Suits', 'Kurta Sets', 'Shaadi Specials', 'Pastel Pink', 'Necklace'].map((tag) => (
+          {['Lady Garments', 'Shoes', 'T-Shirts', 'Shirts', 'Jutti', 'Sneakers', 'Linen'].map((tag) => (
             <button
               key={tag}
               type="button"
