@@ -5,9 +5,10 @@ import { supabase } from '../lib/supabase'
 
 interface FooterProps {
   onSelectCategory?: (category: string) => void
+  onOpenTrackOrder?: () => void
 }
 
-export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
+export const Footer: React.FC<FooterProps> = ({ onSelectCategory, onOpenTrackOrder }) => {
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -157,7 +158,15 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
               Customer Support
             </h5>
             <ul className="space-y-2.5 text-neutral-400">
-              <li><a href="#" className="hover:text-amber-300 transition-colors">Track Your Order</a></li>
+              <li>
+                <button
+                  type="button"
+                  onClick={onOpenTrackOrder}
+                  className="hover:text-amber-300 transition-colors text-left cursor-pointer"
+                >
+                  Track Your Order
+                </button>
+              </li>
               <li><a href="#" className="hover:text-amber-300 transition-colors">Shipping &amp; Delivery Policy</a></li>
               <li><a href="#" className="hover:text-amber-300 transition-colors">Return &amp; Exchange</a></li>
               <li><a href="#" className="hover:text-amber-300 transition-colors">Size Guide &amp; Chart</a></li>

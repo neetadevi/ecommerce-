@@ -56,12 +56,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Badges */}
         <div className="absolute top-2 left-2 flex flex-col gap-1 z-10">
           {product.isBestSeller && (
-            <span className="bg-[#8B1E3F] text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 uppercase tracking-wider rounded-none shadow-xs">
+            <span className="bg-[#4b0006] text-white text-[9px] sm:text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-tl-md rounded-br-md shadow-xs">
               BESTSELLER
             </span>
           )}
           {product.discount > 0 && (
-            <span className="bg-amber-600 text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-none shadow-xs">
+            <span className="bg-[#ab8c52] text-white text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-tl-md rounded-br-md shadow-xs">
               {product.discount}% OFF
             </span>
           )}
@@ -181,9 +181,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <button
             type="button"
             onClick={handleBuy}
-            className="py-2 px-1 bg-neutral-900 hover:bg-[#8B1E3F] text-white rounded text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1 transition-all duration-200 cursor-pointer shadow-xs"
+            className="py-2 px-1 bg-[#4b0006] hover:bg-[#630008] text-white rounded text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1 transition-all duration-200 cursor-pointer shadow-xs active:scale-98"
           >
-            <Zap size={12} className="text-amber-400" /> Buy Now
+            <Zap size={12} className="text-amber-300" /> Buy Now
           </button>
         </div>
 

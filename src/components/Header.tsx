@@ -53,7 +53,7 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Main Navbar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          
+
           {/* Mobile Hamburger Toggle */}
           <div className="flex items-center lg:hidden">
             <button
@@ -73,11 +73,10 @@ export const Header: React.FC<HeaderProps> = ({
                 key={link.value}
                 type="button"
                 onClick={() => onSelectCategory(link.value)}
-                className={`transition-colors duration-200 pb-1 relative cursor-pointer ${
-                  activeCategory === link.value
-                    ? 'text-amber-800 font-semibold'
-                    : 'hover:text-amber-700'
-                }`}
+                className={`transition-colors duration-200 pb-1 relative cursor-pointer ${activeCategory === link.value
+                  ? 'text-amber-800 font-semibold'
+                  : 'hover:text-amber-700'
+                  }`}
               >
                 {link.label}
                 {activeCategory === link.value && (
@@ -210,9 +209,8 @@ export const Header: React.FC<HeaderProps> = ({
                   onSelectCategory(link.value)
                   setMobileMenuOpen(false)
                 }}
-                className={`text-left py-2 text-sm uppercase tracking-wider font-medium cursor-pointer ${
-                  activeCategory === link.value ? 'text-amber-800 font-bold' : 'text-neutral-700'
-                }`}
+                className={`text-left py-2 text-sm uppercase tracking-wider font-medium cursor-pointer ${activeCategory === link.value ? 'text-amber-800 font-bold' : 'text-neutral-700'
+                  }`}
               >
                 {link.label}
               </button>

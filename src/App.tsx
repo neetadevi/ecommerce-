@@ -13,6 +13,9 @@ import { SearchModal } from './components/SearchModal'
 import { PRODUCTS, type Product } from './data/mockData'
 import { supabase } from './lib/supabase'
 import { SlidersHorizontal, ChevronDown, ChevronUp } from 'lucide-react'
+import { BottomNav } from './components/BottomNav'
+import { WhatsAppButton } from './components/WhatsAppButton'
+import { TrackOrderModal } from './components/TrackOrderModal'
 
 export function App() {
   // Category & Filter states
@@ -27,6 +30,7 @@ export function App() {
   const [isAuthOpen, setIsAuthOpen] = useState<boolean>(false)
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false)
   const [isCheckoutOpen, setIsCheckoutOpen] = useState<boolean>(false)
+  const [isTrackOrderOpen, setIsTrackOrderOpen] = useState<boolean>(false)
   const [modalProduct, setModalProduct] = useState<Product | null>(null)
 
   // Checkout states
@@ -277,7 +281,7 @@ export function App() {
                 <button
                   type="button"
                   onClick={() => setVisibleCount(displayedProducts.length)}
-                  className="px-8 py-3 bg-neutral-900 hover:bg-[#8B1E3F] text-white font-bold text-xs uppercase tracking-[0.2em] rounded-none transition-all shadow-md flex items-center justify-center gap-2 mx-auto cursor-pointer"
+                  className="px-8 py-3 bg-[#4b0006] hover:bg-[#630008] text-white font-bold text-xs uppercase tracking-[0.2em] rounded-none transition-all shadow-md flex items-center justify-center gap-2 mx-auto cursor-pointer"
                 >
                   See More ({displayedProducts.length - visibleCount} more items)
                   <ChevronDown size={15} />
@@ -314,7 +318,10 @@ export function App() {
       </section>
 
       {/* Footer with Professional Level Design */}
-      <Footer onSelectCategory={handleSelectCategory} />
+      <Footer 
+        onSelectCategory={handleSelectCategory}
+        onOpenTrackOrder={() => setIsTrackOrderOpen(true)}
+      />
 
       {/* Interactive Modals & Drawers */}
       <ProductModal
@@ -377,6 +384,28 @@ export function App() {
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
         onSelectProduct={(p) => setModalProduct(p)}
+      />
+
+      {/* Order Tracking Modal */}
+      <TrackOrderModal
+        isOpen={isTrackOrderOpen}
+        onClose={() => setIsTrackOrderOpen(false)}
+      />
+
+      {/* WhatsApp Floating Chat */}
+      <WhatsAppButton />
+
+      {/* Mobile Sticky Bottom Navigation Bar */}
+      <BottomNav
+        cartCount={cartItems.reduce((acc, i) => acc + i.quantity, 0)}
+        wishlistCount={wishlistItems.length}
+        onHomeClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        onCategoriesClick={() => {
+          document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' })
+        }}
+        onSearchClick={() => setIsSearchOpen(true)}
+        onWishlistClick={() => setIsWishlistOpen(true)}
+        onCartClick={() => setIsCartOpen(true)}
       />
 
       {/* Live Supabase Connection Pill */}
