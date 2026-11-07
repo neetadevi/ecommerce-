@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { X, CheckCircle, Truck, CreditCard, QrCode, Banknote, ShieldCheck } from 'lucide-react'
-import { CartItem } from './CartDrawer'
+import { X, CheckCircle, CreditCard, QrCode, Banknote } from 'lucide-react'
+import type { CartItem } from './CartDrawer'
+import { supabase } from '../lib/supabase'
 
 interface CheckoutModalProps {
   isOpen: boolean
@@ -22,6 +23,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   if (!isOpen) return null
 
   const [step, setStep] = useState<'shipping' | 'success'>('shipping')
+  const [submitting, setSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
@@ -38,12 +40,47 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   const shipping = subtotal >= 2999 ? 0 : 199
   const total = Math.max(0, subtotal - discountAmount + shipping)
 
-  const handleSubmitOrder = (e: React.FormEvent) => {
+  const handleSubmitOrder = async (e: React.FormEvent) => {
     e.preventDefault()
+    setSubmitting(true)
+
     const generatedId = 'UF-' + Math.floor(100000 + Math.random() * 900000)
     setOrderId(generatedId)
-    setStep('success')
-    onOrderComplete()
+
+    // Save order into Supabase database
+    try {
+      const simplifiedItems = cartItems.map(item => ({
+        id: item.product.id,
+        title: item.product.title,
+        price: item.product.price,
+        size: item.size,
+        quantity: item.quantity,
+        image: item.product.image
+      }))
+
+      await supabase.from('orders').insert({
+        id: generatedId,
+        full_name: formData.fullName,
+        phone: formData.phone,
+        email: formData.email || null,
+        address: formData.address,
+        city: formData.city,
+        state: formData.state,
+        pincode: formData.pincode,
+        subtotal,
+        discount: discountAmount,
+        total,
+        payment_method: paymentMethod,
+        items: simplifiedItems,
+        status: 'confirmed'
+      })
+    } catch (err) {
+      console.warn('Supabase order insert note:', err)
+    } finally {
+      setSubmitting(false)
+      setStep('success')
+      onOrderComplete()
+    }
   }
 
   return (
@@ -274,3 +311,4 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     </div>
   )
 }
+

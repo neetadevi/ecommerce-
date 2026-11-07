@@ -89,3 +89,4 @@ export const CelebrityCloset: React.FC<CelebrityClosetProps> = ({ onShopCelebrit
     </section>
   )
 }
+

@@ -124,19 +124,27 @@ export function App() {
     let result = [...PRODUCTS]
 
     // Category filter
-    if (activeCategory !== 'All' && activeCategory !== 'Celebrity') {
+    if (activeCategory === 'New Launch') {
+      result = result.filter(p => p.isNew)
+    } else if (activeCategory === 'Velvets') {
+      result = result.filter(p => p.fabric.toLowerCase().includes('velvet') || p.title.toLowerCase().includes('velvet'))
+    } else if (activeCategory === 'Sale') {
+      result = result.filter(p => p.discount >= 20)
+    } else if (activeCategory !== 'All' && activeCategory !== 'Celebrity') {
       result = result.filter(p => p.category === activeCategory)
     }
 
     // Tag filter
     if (filterTag === 'bestsellers') {
       result = result.filter(p => p.isBestSeller)
-    } else if (filterTag === 'velvet') {
-      result = result.filter(p => p.fabric.toLowerCase().includes('velvet'))
+    } else if (filterTag === 'new') {
+      result = result.filter(p => p.isNew)
+    } else if (filterTag === 'velvets') {
+      result = result.filter(p => p.fabric.toLowerCase().includes('velvet') || p.title.toLowerCase().includes('velvet'))
+    } else if (filterTag === 'jewels') {
+      result = result.filter(p => p.category === 'Jewellery')
     } else if (filterTag === 'shaadi') {
       result = result.filter(p => p.category === 'Suit Sets' || p.category === 'Kurta Sets')
-    } else if (filterTag === 'under7k') {
-      result = result.filter(p => p.price <= 7000)
     }
 
     // Sorting
@@ -237,23 +245,24 @@ export function App() {
             </div>
           </div>
 
-          {/* Quick Filter Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none">
+          {/* Quick Filter Tabs matching Lakshita */}
+          <div className="flex items-center gap-3 overflow-x-auto pb-4 mb-8 scrollbar-none border-b border-neutral-100">
             {[
-              { id: 'all', label: 'All Items' },
-              { id: 'bestsellers', label: 'Bestsellers 🔥' },
-              { id: 'velvet', label: 'Royal Velvet Edit ✨' },
-              { id: 'shaadi', label: 'Shaadi Specials 💍' },
-              { id: 'under7k', label: 'Under ₹7,000' }
+              { id: 'all', label: 'See All' },
+              { id: 'new', label: 'New Launch' },
+              { id: 'bestsellers', label: 'Bestsellers' },
+              { id: 'velvets', label: 'Velvets' },
+              { id: 'jewels', label: 'LK JEWELS' },
+              { id: 'shaadi', label: 'Shaadi Specials' }
             ].map((f) => (
               <button
                 key={f.id}
                 type="button"
                 onClick={() => setFilterTag(f.id)}
-                className={`whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider transition-all cursor-pointer ${
+                className={`whitespace-nowrap px-5 py-2 text-xs uppercase tracking-widest font-bold transition-all cursor-pointer border-b-2 ${
                   filterTag === f.id
-                    ? 'bg-amber-800 text-white shadow-xs'
-                    : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+                    ? 'border-neutral-900 text-neutral-900'
+                    : 'border-transparent text-neutral-400 hover:text-neutral-700'
                 }`}
               >
                 {f.label}

@@ -71,3 +71,4 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({ onSelectCategory }) 
     </section>
   )
 }
+

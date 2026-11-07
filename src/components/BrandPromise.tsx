@@ -42,13 +42,13 @@ export const BrandPromise: React.FC = () => {
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-2">
           <p className="text-xs uppercase tracking-[0.3em] text-amber-800 font-bold">
-            Heritage &amp; Quality
+            LK PROMISE
           </p>
           <h2 
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
             className="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900"
           >
-            THE UNIQUE_FASHION PROMISE
+            The unique_fashion Promise
           </h2>
           <div className="w-16 h-0.5 bg-amber-700 mx-auto mt-2" />
         </div>
@@ -81,7 +81,7 @@ export const BrandPromise: React.FC = () => {
           <div className="space-y-2 text-center md:text-left">
             <div className="inline-flex items-center gap-2 text-amber-400 text-xs uppercase tracking-widest font-bold">
               <MapPin size={16} />
-              Visit In Person
+              OUR STORES
             </div>
             <h3 
               style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
@@ -106,3 +106,4 @@ export const BrandPromise: React.FC = () => {
     </section>
   )
 }
+

@@ -62,3 +62,4 @@ export const Logo: React.FC<LogoProps> = ({ variant = 'dark', className = '', si
     </div>
   )
 }
+

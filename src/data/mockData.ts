@@ -430,3 +430,4 @@ export const BRAND_PROMISES = [
     icon: 'Truck'
   }
 ]
+

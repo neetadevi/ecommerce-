@@ -166,3 +166,4 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onShopClick }) => {
     </section>
   )
 }
+

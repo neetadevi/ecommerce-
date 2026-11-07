@@ -31,13 +31,15 @@ export const Header: React.FC<HeaderProps> = ({
   const [userDropdownOpen, setUserDropdownOpen] = useState(false)
 
   const navLinks = [
-    { label: 'All Collection', value: 'All' },
+    { label: 'New Launch', value: 'New Launch' },
     { label: 'Suit Sets', value: 'Suit Sets' },
     { label: 'Kurta Sets', value: 'Kurta Sets' },
-    { label: 'Co-ord Sets', value: 'Co-ord Sets' },
+    { label: 'Co-Ord Sets', value: 'Co-ord Sets' },
     { label: 'Kurtas & Kurtis', value: 'Kurtas & Kurtis' },
-    { label: 'Jewellery', value: 'Jewellery' },
-    { label: 'Celebrity Closet', value: 'Celebrity' }
+    { label: 'Velvets', value: 'Velvets' },
+    { label: 'LK Jewels', value: 'Jewellery' },
+    { label: 'Bottomwear', value: 'Bottoms' },
+    { label: 'UPTO 50% OFF', value: 'Sale' }
   ]
 
   return (
@@ -46,7 +48,7 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="bg-[#1C1917] text-amber-200 py-1.5 px-4 text-xs font-medium tracking-widest text-center flex items-center justify-center gap-3 overflow-hidden select-none">
         <Sparkles size={13} className="text-amber-400 animate-pulse hidden sm:inline" />
         <span className="uppercase text-[11px] sm:text-xs tracking-wider">
-          ✦ FLAT 20% OFF ON FESTIVE COLLECTION | USE CODE: <strong className="text-white underline decoration-amber-400 font-bold">UNIQUE20</strong> ✦ FREE EXPRESS SHIPPING ACROSS INDIA ✦
+          WINTER • NAYAM • UPTO 50% OFF • VELVETS • FREE EXPRESS SHIPPING ACROSS INDIA • CODE: <strong className="text-white underline decoration-amber-400 font-bold">UNIQUE20</strong>
         </span>
         <Sparkles size={13} className="text-amber-400 animate-pulse hidden sm:inline" />
       </div>
@@ -264,3 +266,4 @@ export const Header: React.FC<HeaderProps> = ({
     </header>
   )
 }
+
