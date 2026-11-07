@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { X, Star, ShoppingBag, Heart, ShieldCheck, Truck, RotateCcw, Check } from 'lucide-react'
-import { Product } from '../data/mockData'
+import { X, Star, ShoppingBag, Heart, ShieldCheck, Truck, RotateCcw, Check, MapPin } from 'lucide-react'
+import type { Product } from '../data/mockData'
+import { SizeGuideModal } from './SizeGuideModal'
 
 interface ProductModalProps {
   product: Product | null
@@ -23,11 +24,23 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   const [selectedSize, setSelectedSize] = useState<string>(product.sizes[0] || 'M')
   const [quantity, setQuantity] = useState<number>(1)
   const [added, setAdded] = useState(false)
+  const [sizeGuideOpen, setSizeGuideOpen] = useState(false)
+  const [pincode, setPincode] = useState('')
+  const [deliveryEstimate, setDeliveryEstimate] = useState<string | null>(null)
 
   const handleAdd = () => {
     onAddToCart(product, selectedSize, quantity)
     setAdded(true)
     setTimeout(() => setAdded(false), 1500)
+  }
+
+  const handleCheckPincode = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (pincode.length === 6) {
+      setDeliveryEstimate(`Express Delivery to ${pincode} available by Tuesday! Free Shipping on this order.`)
+    } else {
+      setDeliveryEstimate('Please enter a valid 6-digit Indian PIN code.')
+    }
   }
 
   return (
@@ -140,9 +153,13 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 <span className="text-xs uppercase font-bold text-neutral-800 tracking-wider">
                   Select Size
                 </span>
-                <span className="text-[11px] text-amber-800 underline font-medium cursor-pointer">
+                <button
+                  type="button"
+                  onClick={() => setSizeGuideOpen(true)}
+                  className="text-[11px] text-amber-800 underline font-semibold cursor-pointer hover:text-amber-900"
+                >
                   Size Guide
-                </span>
+                </button>
               </div>
               <div className="flex flex-wrap gap-2">
                 {product.sizes.map((sz) => (
@@ -162,6 +179,37 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               </div>
             </div>
           )}
+
+          {/* Delivery Pin Code Checker */}
+          <div className="pt-2">
+            <span className="text-[11px] font-bold text-neutral-700 uppercase tracking-wider block mb-1">
+              Check Delivery
+            </span>
+            <form onSubmit={handleCheckPincode} className="flex gap-2">
+              <div className="relative flex-1">
+                <MapPin size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-neutral-400" />
+                <input
+                  type="text"
+                  maxLength={6}
+                  value={pincode}
+                  onChange={(e) => setPincode(e.target.value.replace(/\D/g, ''))}
+                  placeholder="Enter 6-digit PIN code"
+                  className="w-full pl-7 pr-3 py-1.5 text-xs bg-neutral-50 border border-neutral-200 rounded focus:outline-none focus:border-amber-700"
+                />
+              </div>
+              <button
+                type="submit"
+                className="px-3 py-1.5 bg-neutral-900 hover:bg-amber-800 text-white text-xs font-bold uppercase tracking-wider rounded cursor-pointer transition-colors"
+              >
+                Check
+              </button>
+            </form>
+            {deliveryEstimate && (
+              <p className={`text-[11px] mt-1 font-semibold ${deliveryEstimate.includes('available') ? 'text-emerald-700' : 'text-amber-800'}`}>
+                {deliveryEstimate}
+              </p>
+            )}
+          </div>
 
           {/* Quantity & Actions */}
           <div className="space-y-3 pt-2">
@@ -239,6 +287,11 @@ export const ProductModal: React.FC<ProductModalProps> = ({
 
         </div>
       </div>
+
+      <SizeGuideModal
+        isOpen={sizeGuideOpen}
+        onClose={() => setSizeGuideOpen(false)}
+      />
     </div>
   )
 }

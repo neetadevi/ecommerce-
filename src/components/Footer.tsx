@@ -1,17 +1,27 @@
 import React, { useState } from 'react'
 import { Logo } from './Logo'
 import { Mail, Phone, MapPin } from 'lucide-react'
+import { supabase } from '../lib/supabase'
 
 export const Footer: React.FC = () => {
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (email) {
+    if (!email) return
+
+    setLoading(true)
+    try {
+      await supabase.from('newsletter_subscribers').insert({ email })
+    } catch (err) {
+      console.warn('Newsletter subscribe note:', err)
+    } finally {
+      setLoading(false)
       setSubscribed(true)
       setEmail('')
-      setTimeout(() => setSubscribed(false), 3000)
+      setTimeout(() => setSubscribed(false), 4000)
     }
   }
 
